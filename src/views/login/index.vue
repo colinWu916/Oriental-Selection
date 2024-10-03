@@ -11,7 +11,7 @@
             <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" @change="login" show-password></el-input>
+            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" @keyup.enter="login" show-password></el-input>
           </el-form-item>
           <el-form-item>
             <el-button :loading="loading" class="login_btn" type="primary" size="default" @click="login">登录</el-button>

@@ -18,5 +18,7 @@ app.use(ElementPlus, {
 app.use(pinia)
 app.use(router)
 app.use(gloalComponent)
+import { isHasButton } from '@/directive/has'
+isHasButton(app)
 import './permisstion';
 app.mount('#app')

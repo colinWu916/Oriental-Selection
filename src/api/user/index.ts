@@ -10,10 +10,11 @@ export const reqLogin = (data: loginFormData) => {
   });
 }
 
-export const reqUserInfo = () => {
+export const reqUserInfo = (data: any) => {
   return $HttpService.commonRequest({
     url: '/user/info',
     method: 'get',
+    params: data
   });
 }
 

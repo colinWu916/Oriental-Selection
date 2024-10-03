@@ -11,3 +11,16 @@ export const GET_TOKEN = () => {
 export const REMOVE_TOKEN = () => {
   localStorage.removeItem('TOKEN')
 }
+
+//存储数据
+export const SET_NAME = (name: string) => {
+  localStorage.setItem('NAME', name)
+}
+//本地存储获取数据
+export const GET_NAME = () => {
+  return localStorage.getItem('NAME')
+}
+//本地存储删除数据方法
+export const REMOVE_NAME = () => {
+  localStorage.removeItem('NAME')
+}
