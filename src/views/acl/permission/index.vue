@@ -6,14 +6,31 @@
     <el-table-column label="操作">
       <!-- row:即为已有的菜单对象|按钮的对象的数据 -->
       <template #="{ row, $index }">
-        <el-button type="primary" @click="addPermisstion(row)" size="small" :disabled="row.level == 4 ? true : false">{{
-          row.level == 3 ? '添加功能'
-            : '添加菜单' }}</el-button>
-        <el-button type="primary" @click="updatePermisstion(row)" size="small"
-          :disabled="row.level == 1 ? true : false">编辑</el-button>
-        <el-popconfirm :title="`你确定要删除${row.name}?`" width="260px" @confirm="removeMenu(row.id)">
+        <el-button
+          type="primary"
+          @click="addPermisstion(row)"
+          size="small"
+          :disabled="row.level == 4 ? true : false"
+        >
+          {{ row.level == 3 ? '添加功能' : '添加菜单' }}
+        </el-button>
+        <el-button
+          type="primary"
+          @click="updatePermisstion(row)"
+          size="small"
+          :disabled="row.level == 1 ? true : false"
+        >
+          编辑
+        </el-button>
+        <el-popconfirm
+          :title="`你确定要删除${row.name}?`"
+          width="260px"
+          @confirm="removeMenu(row.id)"
+        >
           <template #reference>
-            <el-button type="primary" size="small" :disabled="row.level == 1 ? true : false">删除</el-button>
+            <el-button type="primary" size="small" :disabled="row.level == 1 ? true : false">
+              删除
+            </el-button>
           </template>
         </el-popconfirm>
       </template>
@@ -33,42 +50,40 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="save">
-          确定
-        </el-button>
+        <el-button type="primary" @click="save">确定</el-button>
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from "element-plus";
-import { ref, onMounted, reactive } from "vue";
+import { ElMessage } from 'element-plus'
+import { ref, onMounted, reactive } from 'vue'
 // //引入获取菜单请求API
-import { reqAllPermisstion, reqAddOrUpdateMenu } from '@/api/acl/menu';
+import { reqAllPermisstion, reqAddOrUpdateMenu } from '@/api/acl/menu'
 // //引入ts类型
 // import type { MenuParams, PermisstionResponseData, PermisstionList, Permisstion } from '@/api/acl/menu/type';
 // import { ElMessage } from "element-plus";
 // //存储菜单的数据
-let PermisstionArr = ref<any[]>([]);
+let PermisstionArr = ref<any[]>([])
 // //控制对话框的显示与隐藏
-let dialogVisible = ref<boolean>(false);
+let dialogVisible = ref<boolean>(false)
 // //携带的参数
 let menuData = reactive<any>({
-  "code": "",
-  "level": 0,
-  "name": "",
-  "pid": 0,
+  code: '',
+  level: 0,
+  name: '',
+  pid: 0,
 })
 //组件挂载完毕
 onMounted(() => {
-  getHasPermisstion();
-});
+  getHasPermisstion()
+})
 //获取菜单数据的方法
 const getHasPermisstion = async () => {
-  let result: any = await reqAllPermisstion();
+  let result: any = await reqAllPermisstion()
   if (result.code == 200) {
-    PermisstionArr.value = result.data;
+    PermisstionArr.value = result.data
   }
 }
 
@@ -76,28 +91,28 @@ const getHasPermisstion = async () => {
 const addPermisstion = (row: any) => {
   Object.assign(menuData, {
     id: 0,
-    "code": "",
-    "level": 0,
-    "name": "",
-    "pid": 0,
+    code: '',
+    level: 0,
+    name: '',
+    pid: 0,
   })
-  dialogVisible.value = true;
-  menuData.level = row.level + 1;
-  menuData.pid = (row.id as number);
+  dialogVisible.value = true
+  menuData.level = row.level + 1
+  menuData.pid = row.id as number
 }
 //编辑已有的菜单
 const updatePermisstion = (row: any) => {
-  dialogVisible.value = true;
-  Object.assign(menuData, row);
+  dialogVisible.value = true
+  Object.assign(menuData, row)
 }
 
 //确定按钮的回调
 const save = async () => {
-  let result: any = await reqAddOrUpdateMenu(menuData);
+  let result: any = await reqAddOrUpdateMenu(menuData)
   if (result.code == 200) {
-    dialogVisible.value = false;
+    dialogVisible.value = false
     ElMessage({ type: 'success', message: menuData.id ? '更新成功' : '添加成功' })
-    getHasPermisstion();
+    getHasPermisstion()
   }
 }
 
@@ -109,7 +124,6 @@ const removeMenu = async (id: number) => {
   //   getHasPermisstion();
   // }
 }
-
 </script>
 
 <style scoped></style>

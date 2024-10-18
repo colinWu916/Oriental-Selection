@@ -9,21 +9,23 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue';
-import useLayOutSettingStore from '@/store/modules/setting';
-const layOutSettingStore = useLayOutSettingStore();
-
+import { nextTick, ref, watch } from 'vue'
+import useLayOutSettingStore from '@/store/modules/setting'
+const layOutSettingStore = useLayOutSettingStore()
 
 //控制当前组件是否销毁重建
-let flag = ref(true);
+let flag = ref(true)
 
 //监听仓库内部数据是否发生变化,如果发生变化，说明用户点击过刷新按钮
-watch(() => layOutSettingStore.refsh, () => {
-  flag.value = false;
-  nextTick(() => {
-    flag.value = true;
-  })
-})
+watch(
+  () => layOutSettingStore.refsh,
+  () => {
+    flag.value = false
+    nextTick(() => {
+      flag.value = true
+    })
+  },
+)
 </script>
 
 <style scoped>
@@ -33,7 +35,7 @@ watch(() => layOutSettingStore.refsh, () => {
 }
 
 .fade-enter-active {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .fade-enter-to {

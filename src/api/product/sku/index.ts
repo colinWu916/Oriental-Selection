@@ -18,14 +18,10 @@ enum API {
 export const reqSkuList = (page: number, limit: number) =>
   request.get<any, SkuResponseData>(API.SKU_URL + `${page}/${limit}`)
 //已有商品上架的请求
-export const reqSaleSku = (skuId: number) =>
-  request.get<any, any>(API.SALE_URL + skuId)
+export const reqSaleSku = (skuId: number) => request.get<any, any>(API.SALE_URL + skuId)
 //下架的请求
-export const reqCancelSale = (skuId: number) =>
-  request.get<any, any>(API.CANCELSALE_URL + skuId)
+export const reqCancelSale = (skuId: number) => request.get<any, any>(API.CANCELSALE_URL + skuId)
 //获取商品详情的接口
-export const reqSkuInfo = (skuId: number) =>
-  request.get<any, SkuInfoData>(API.SKUINFO_URL + skuId)
+export const reqSkuInfo = (skuId: number) => request.get<any, SkuInfoData>(API.SKUINFO_URL + skuId)
 //删除某一个已有的商品
-export const reqRemoveSku = (skuId: number) =>
-  request.delete<any, any>(API.DELETESKU_URL + skuId)
+export const reqRemoveSku = (skuId: number) => request.delete<any, any>(API.DELETESKU_URL + skuId)

@@ -11,10 +11,24 @@
             <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" @keyup.enter="login" show-password></el-input>
+            <el-input
+              type="password"
+              :prefix-icon="Lock"
+              v-model="loginForm.password"
+              @keyup.enter="login"
+              show-password
+            ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button :loading="loading" class="login_btn" type="primary" size="default" @click="login">登录</el-button>
+            <el-button
+              :loading="loading"
+              class="login_btn"
+              type="primary"
+              size="default"
+              @click="login"
+            >
+              登录
+            </el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -24,42 +38,41 @@
 
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive, ref } from 'vue';
-import { ElNotification } from "element-plus";
-import useUserStore from '@/store/modules/user';
-import { getTime } from '@/utils/time';
-import { useRoute, useRouter } from 'vue-router';
+import { reactive, ref } from 'vue'
+import { ElNotification } from 'element-plus'
+import useUserStore from '@/store/modules/user'
+import { getTime } from '@/utils/time'
+import { useRoute, useRouter } from 'vue-router'
 
-
-let useStore = useUserStore();
-let $router = useRouter();
-const $route = useRoute();
-const loginForms = ref();
-let loading = ref(false);
+let useStore = useUserStore()
+let $router = useRouter()
+const $route = useRoute()
+const loginForms = ref()
+let loading = ref(false)
 const loginForm = reactive({
   username: '',
-  password: ''
+  password: '',
 })
 
 const login = async () => {
-  await loginForms.value.validate();
-  loading.value = true;
+  await loginForms.value.validate()
+  loading.value = true
   try {
-    await useStore.userLogin(loginForm);
-    let redirect: any = $route.query.redirect;
-    $router.push({ path: redirect || '/' });
+    await useStore.userLogin(loginForm)
+    let redirect: any = $route.query.redirect
+    $router.push({ path: redirect || '/' })
     ElNotification({
       type: 'success',
       message: '欢迎回来',
-      title: `HI,${getTime()}好`
-    });
-  } catch(e) {
+      title: `HI,${getTime()}好`,
+    })
+  } catch (e) {
     ElNotification({
       type: 'error',
-      message: (e as Error).message
+      message: (e as Error).message,
     })
   }
-  loading.value = false;
+  loading.value = false
 }
 
 const validatorUserName = (rule: any, value: any, callback: any) => {
@@ -68,17 +81,17 @@ const validatorUserName = (rule: any, value: any, callback: any) => {
   //函数:如果符合条件callBack放行通过即为
   //如果不符合条件callBack方法,注入错误提示信息
   if (value.length >= 5) {
-    callback();
+    callback()
   } else {
-    callback(new Error('账号长度至少五位'));
+    callback(new Error('账号长度至少五位'))
   }
 }
 
 const validatorPassword = (rule: any, value: any, callback: any) => {
   if (value.length >= 6) {
-    callback();
+    callback()
   } else {
-    callback(new Error('密码长度至少六位'));
+    callback(new Error('密码长度至少六位'))
   }
 }
 
@@ -86,20 +99,16 @@ const rules = {
   username: [
     {
       trigger: 'change',
-      validator: validatorUserName
-    }
+      validator: validatorUserName,
+    },
   ],
   password: [
     {
       trigger: 'change',
-      validator: validatorPassword
-    }
-  ]
+      validator: validatorPassword,
+    },
+  ],
 }
-
-
-
-
 </script>
 <style scoped lang="scss">
 .login_container {
@@ -112,7 +121,7 @@ const rules = {
     position: relative;
     width: 80%;
     top: 30vh;
-    background: url("@/assets/images/login_form.png") no-repeat;
+    background: url('@/assets/images/login_form.png') no-repeat;
     background-size: cover;
     padding: 40px;
 

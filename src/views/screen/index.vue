@@ -25,33 +25,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Top from './components/top/index.vue';
-import Tourist from './components/tourist/index.vue';
-import Sex from './components/sex/index.vue';
+import { ref, onMounted } from 'vue'
+import Top from './components/top/index.vue'
+import Tourist from './components/tourist/index.vue'
+import Sex from './components/sex/index.vue'
 import Age from './components/age/index.vue'
-import Map from './components/map/index.vue';
-import Line from './components/line/index.vue';
-import Rank from './components/rank/index.vue';
-import Year from './components/year/index.vue';
+import Map from './components/map/index.vue'
+import Line from './components/line/index.vue'
+import Rank from './components/rank/index.vue'
+import Year from './components/year/index.vue'
 import Counter from './components/couter/index.vue'
 //获取数据大屏展示内容盒子的DOM元素
-let screen = ref();
+let screen = ref()
 onMounted(() => {
   screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
-});
+})
 //定义大屏缩放比例
 function getScale(w = 1920, h = 1080) {
-  const ww = window.innerWidth / w;
-  const wh = window.innerHeight / h;
-  return ww < wh ? ww : wh;
+  const ww = window.innerWidth / w
+  const wh = window.innerHeight / h
+  return ww < wh ? ww : wh
 }
 //监听视口变化
 window.onresize = () => {
   screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
 }
-
-
 </script>
 
 <style scoped lang="scss">
@@ -89,7 +87,6 @@ window.onresize = () => {
 
         .year {
           flex: 1;
-
         }
 
         .count {
@@ -109,7 +106,6 @@ window.onresize = () => {
 
         .sex {
           flex: 1;
-
         }
 
         .age {

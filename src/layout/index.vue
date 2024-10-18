@@ -7,8 +7,13 @@
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件-->
-        <el-menu :collapse="layOutSettingStore.fold ? true : false" :default-active="$route.path"
-          background-color="#001529" text-color="white" active-text-color="yellowgreen">
+        <el-menu
+          :collapse="layOutSettingStore.fold ? true : false"
+          :default-active="$route.path"
+          background-color="#001529"
+          text-color="white"
+          active-text-color="yellowgreen"
+        >
           <!--根据路由动态生成菜单-->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
@@ -27,22 +32,17 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
-import Main from './main/index.vue';
-import Tabbar from './tabbar/index.vue';
+import Main from './main/index.vue'
+import Tabbar from './tabbar/index.vue'
 import useUserStore from '@/store/modules/user'
 import useLayOutSettingStore from '@/store/modules/setting'
 
-
-
-
 let $route = useRoute()
-const userStore = useUserStore();
-const layOutSettingStore = useLayOutSettingStore();
-
-
+const userStore = useUserStore()
+const layOutSettingStore = useLayOutSettingStore()
 </script>
 
 <style scoped lang="scss">
@@ -80,7 +80,7 @@ const layOutSettingStore = useLayOutSettingStore();
     transition: all 0.3s;
 
     &.fold {
-      width: calc(100vw - $base-menu-min-width );
+      width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
     }
   }
@@ -96,10 +96,9 @@ const layOutSettingStore = useLayOutSettingStore();
     transition: all 0.3s;
 
     &.fold {
-      width: calc(100vw - $base-menu-min-width );
+      width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
     }
-
   }
 }
 </style>

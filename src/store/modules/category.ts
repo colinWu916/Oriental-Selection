@@ -30,14 +30,14 @@ const useCategoryStore = defineStore('Category', {
     //获取二级分类的数据
     async getC2() {
       //获取对应一级分类的下二级分类的数据
-      const result: any = await reqC2({id: this.c1Id})
+      const result: any = await reqC2({ id: this.c1Id })
       if (result.code == 200) {
         this.c2Arr = result.data
       }
     },
     //获取三级分类的数据
     async getC3() {
-      const result: any = await reqC3({id: this.c2Id})
+      const result: any = await reqC3({ id: this.c2Id })
       if (result.code == 200) {
         this.c3Arr = result.data
       }

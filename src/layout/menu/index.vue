@@ -13,7 +13,11 @@
     </template>
     <!-- 有子路由但是只有一个子路由 -->
     <template v-if="item.children && item.children.length == 1">
-      <el-menu-item :index="item.children[0].path" v-if="!item.children[0].meta.hidden" @click="goRoute">
+      <el-menu-item
+        :index="item.children[0].path"
+        v-if="!item.children[0].meta.hidden"
+        @click="goRoute"
+      >
         <el-icon>
           <component :is="item.children[0].meta.icon"></component>
         </el-icon>
@@ -36,22 +40,22 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from 'vue';
-import { useRouter } from 'vue-router';
+import { onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 
 //获取父组件传递过来的全部路由数组
-const props = defineProps(['menuList']);
+const props = defineProps(['menuList'])
 //获取路由器对象
-let $router = useRouter();
+let $router = useRouter()
 //点击菜单的回调
 const goRoute = (vc: any) => {
   //路由跳转
-  $router.push(vc.index);
+  $router.push(vc.index)
 }
 </script>
 <script lang="ts">
 export default {
-  name: 'Menu'
+  name: 'Menu',
 }
 </script>
 

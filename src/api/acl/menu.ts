@@ -1,6 +1,5 @@
 import { HttpService } from '@/utils/request'
-const $HttpService: any = new HttpService('/api');
-
+const $HttpService: any = new HttpService('/api')
 
 export const reqAddOrUpdateMenu = (data: any) => {
   // return $HttpService.commonRequest({
@@ -14,5 +13,5 @@ export const reqAllPermisstion = () => {
   return $HttpService.commonRequest({
     url: '/manage/acl/permission',
     method: 'get',
-  });
+  })
 }

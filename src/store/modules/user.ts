@@ -1,19 +1,14 @@
 //创建用户相关的小仓库
 import { defineStore } from 'pinia'
-import cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep'
 //引入接口
 import { reqLogin, reqLogout, reqUserInfo } from '@/api/user'
-import type {
-  loginFormData,
-  loginResponseData,
-  userInfoReponseData,
-} from '@/api/user/type'
+import type { loginFormData, loginResponseData, userInfoReponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入操作本地存储的工具方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN, GET_NAME, SET_NAME, REMOVE_NAME } from '@/utils/token'
 //引入路由(常量路由)
 import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
-
 
 // import cloneDeep from 'lodash/cloneDeep'
 import router from '@/router'
@@ -56,7 +51,7 @@ const useUserStore = defineStore('User', {
         //pinia仓库存储一下token
         //由于pinia|vuex存储数据其实利用js对象
         this.token = result.data as string
-        this.tempname = data.username;
+        this.tempname = data.username
         //本地存储持久化存储一份
         SET_NAME(data.username as string)
         SET_TOKEN(result.data as string)
@@ -69,21 +64,18 @@ const useUserStore = defineStore('User', {
     //获取用户信息方法
     async userInfo() {
       //获取用户信息进行存储仓库当中[用户头像、名字]
-      const result: userInfoReponseData = await reqUserInfo({name: this.tempname});
+      const result: userInfoReponseData = await reqUserInfo({ name: this.tempname })
       //如果获取用户信息成功，存储一下用户信息
       if (result.code == 200) {
-        this.username = result.data.cnName;
+        this.username = result.data.cnName
         this.avatar = result.data.avatar
         this.buttons = result.data.buttons
         //计算当前用户需要展示的异步路由
-        const userAsyncRoute = filterAsyncRoute(
-          cloneDeep(asnycRoute),
-          result.data.routes,
-        )
+        const userAsyncRoute = filterAsyncRoute(cloneDeep(asnycRoute), result.data.routes)
         //菜单需要的数据整理完毕
-        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute];
+        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
         //目前路由器管理的只有常量路由:用户计算完毕异步路由、任意路由动态追加
-        [...userAsyncRoute, anyRoute].forEach((route: any) => {
+        ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
           router.addRoute(route)
         })
         return 'ok'
@@ -101,8 +93,8 @@ const useUserStore = defineStore('User', {
         this.username = ''
         this.avatar = ''
         this.tempname = ''
-        REMOVE_TOKEN();
-        REMOVE_NAME();
+        REMOVE_TOKEN()
+        REMOVE_NAME()
         return 'ok'
       } else {
         return Promise.reject(new Error(result.message))
