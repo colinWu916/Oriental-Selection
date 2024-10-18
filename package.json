@@ -16,7 +16,8 @@
     "build:test-only": "vite build --mode test",
     "build:prod-only": "vite build --mode production",
     "prepare": "husky install",
-    "commitlint": "commitlint --config commitlint.config.cjs -e -V"
+    "commitlint": "commitlint --config commitlint.config.cjs -e -V",
+    "preinstall": "node ./scripts/preinstall.js"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
