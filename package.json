@@ -14,7 +14,8 @@
     "build:test": "run-p type-check \"build:test-only {@}\" --",
     "build:prod": "run-p type-check \"build:prod-only {@}\" --",
     "build:test-only": "vite build --mode test",
-    "build:prod-only": "vite build --mode production"
+    "build:prod-only": "vite build --mode production",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -40,6 +41,7 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "husky": "^8.0.0",
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
     "sass-embedded": "^1.77.8",

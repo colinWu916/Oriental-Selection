@@ -38,10 +38,12 @@ const handler = () => {
   categoryStore.c2Id = '';
   categoryStore.c3Arr = [];
   categoryStore.c3Id = '';
+
   categoryStore.getC2();
 }
 const handler1 = () => {
   categoryStore.c3Id = '';
+  
   categoryStore.getC3();
 }
 
